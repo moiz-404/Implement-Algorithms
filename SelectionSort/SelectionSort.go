@@ -32,7 +32,7 @@ func main() {
 	fmt.Println("Enter input:")
 	x := input([]int{}, nil)
 	fmt.Println("Output :\n")
-	fmt.Println("unsortd slice item Inputed:", x)
+	fmt.Println("unsorted slice items Inputed:", x)
 	selectionSort(x)
-	fmt.Println("unsortd slice item :", x)
+	fmt.Println("sorted slice items :", x)
 }
