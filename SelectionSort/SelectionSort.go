@@ -17,13 +17,14 @@ func input(x []int, err error) []int {
 func selectionSort(sliceiItem []int) {
 	var n = len(sliceiItem)
 	for i := 0; i < n; i++ {
-		var min = i
-		for j := i; j < n; j++ {
-			if sliceiItem[j] < sliceiItem[min] {
-				min = j
+		var minIndex = i
+		for j := i+1; j < n; j++ {
+			if sliceiItem[j] < sliceiItem[minIndex] {
+				minIndex = j
 			}
 		}
-		sliceiItem[i], sliceiItem[min] = sliceiItem[min], sliceiItem[i]
+		sliceiItem[i], sliceiItem[minIndex] = sliceiItem[minIndex], sliceiItem[i]		
+		
 	}
 }
 
@@ -31,7 +32,8 @@ func main() {
 	
 	fmt.Println("Enter input:")
 	x := input([]int{}, nil)
-	fmt.Println("Output :\n")
+	fmt.Println("Output :")
+	//      5 8 4 9 7 6 2 1 3
 	fmt.Println("unsorted slice items Inputed:", x)
 	selectionSort(x)
 	fmt.Println("sorted slice items :", x)
