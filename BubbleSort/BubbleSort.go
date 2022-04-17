@@ -14,9 +14,10 @@ func BubbleSort(numbers []int) []int {
 			 intermediate := numbers[j]
 			 numbers[j] = numbers[j-1]
 			 numbers[j-1] = intermediate
-						 }
-			  }
-	   }
+			//OR
+			//numbers[j],numbers[j-1] = numbers[j-1],numbers[j]
+			}
+		}
 	return numbers
   }
  func main() {
