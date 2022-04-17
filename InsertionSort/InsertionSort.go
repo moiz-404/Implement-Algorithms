@@ -17,8 +17,8 @@ func input(x []int, err error) []int {
 func insertionSort(sliceiItem []int) {
 	var n = len(sliceiItem)
 	for i := 1; i < n; i++ {
-        j := i
-        for j > 0 {
+        
+        for j := i;j > 0;j-- {
             if sliceiItem[j-1] > sliceiItem[j] {
                 sliceiItem[j-1], sliceiItem[j] = sliceiItem[j], sliceiItem[j-1]
             }
