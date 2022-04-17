@@ -2,54 +2,83 @@ package main
 
 import "fmt"
 
-
-//  Heap construction uses <= 2N compares and exchanges
-// heapSort uses <= 2 N lg N compares and exchanges
-// heapSort is optimal for both time and space, but :
-// - Inner loop longer than quickSort's
-// - Makes poor use of cache memory
-// - Not stable
-// worst: 2 N lg N , average: 2 N lg N , best: N lg N
-// N log N guarantee , in place
-type heapSort struct{}
-
-func NewHeapSort() Sorter {
-	return &heapSort{}
+type minheap struct {
+    arr []int
 }
 
-func (h *heapSort) Sort(arr []int) {
-	//create a binay heap
-	N := len(arr) - 1
-	for x := N / 2; x >= 1; x-- {
-		h.Sink(arr, x, N)
-	}
-	// Delete the max
-
-	for {
-		if N <= 1 {
-			break
-		}
-		common.Swap(arr, 1, N)
-		N--
-		h.Sink(arr, 1, N)
-	}
+func newMinHeap(arr []int) *minheap {
+    minheap := &minheap{
+        arr: arr,
+    }
+    return minheap
 }
 
-// Sink builds a Max heap using bottom-up method
-func (h *heapSort) Sink(arr []int, k, N int) {
-	for {
-		if k > N/2 {
-			break
-		}
-		j := 2 * k
-		if j < N && arr[j] < arr[j+1] {
-			j++
-		}
-		if arr[k] < arr[j] {
-			common.Swap(arr, k, j)
-			k = j
-		} else {
-			break
-		}
-	}
+func (m *minheap) leftchildIndex(index int) int {
+    return 2*index + 1
+}
+
+func (m *minheap) rightchildIndex(index int) int {
+    return 2*index + 2
+}
+
+func (m *minheap) swap(first, second int) {
+    temp := m.arr[first]
+    m.arr[first] = m.arr[second]
+    m.arr[second] = temp
+}
+
+func (m *minheap) leaf(index int, size int) bool {
+    if index >= (size/2) && index <= size {
+        return true
+    }
+    return false
+}
+
+func (m *minheap) downHeapify(current int, size int) {
+    if m.leaf(current, size) {
+        return
+    }
+    smallest := current
+    leftChildIndex := m.leftchildIndex(current)
+    rightRightIndex := m.rightchildIndex(current)
+    if leftChildIndex < size && m.arr[leftChildIndex] < m.arr[smallest] {
+        smallest = leftChildIndex
+    }
+    if rightRightIndex < size && m.arr[rightRightIndex] < m.arr[smallest] {
+        smallest = rightRightIndex
+    }
+    if smallest != current {
+        m.swap(current, smallest)
+        m.downHeapify(smallest, size)
+    }
+    return
+}
+
+func (m *minheap) buildMinHeap(size int) {
+    for index := ((size / 2) - 1); index >= 0; index-- {
+        m.downHeapify(index, size)
+    }
+}
+
+func (m *minheap) sort(size int) {
+    m.buildMinHeap(size)
+    for i := size - 1; i > 0; i-- {
+        // Move current root to end
+        m.swap(0, i)
+        m.downHeapify(0, i)
+    }
+}
+
+func (m *minheap) print() {
+    for _, val := range m.arr {
+        fmt.Println(val)
+    }
+}
+
+func main() {
+    inputArray := []int{6, 5, 3, 7, 2, 8, -1}
+    minHeap := newMinHeap(inputArray)
+    minHeap.sort(len(inputArray))
+    minHeap.print()
+    fmt.Scanln()
 }
