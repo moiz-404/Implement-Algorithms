@@ -18,7 +18,7 @@ func selectionSort(sliceiItem []int) {
 	var n = len(sliceiItem)
 	for i := 0; i < n; i++ {
 		var minIndex = i
-		for j := i+1; j < n; j++ {
+		for j := i; j < n; j++ {
 			if sliceiItem[j] < sliceiItem[minIndex] {
 				minIndex = j
 			}
