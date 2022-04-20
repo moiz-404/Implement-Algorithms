@@ -31,17 +31,17 @@ func (q *queue) HasItems() bool {
 	return len(q.items) > 0
 }
 
-func NewBFSCommand() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "bfs",
-		Short: "...",
-		Run: func(cmd *cobra.Command, args []string) {
-			runBFS()
-		},
-	}
+// func NewBFSCommand() *cobra.Command {
+// 	cmd := &cobra.Command{
+// 		Use:   "bfs",
+// 		Short: "...",
+// 		Run: func(cmd *cobra.Command, args []string) {
+// 			runBFS()
+// 		},
+// 	}
 
-	return cmd
-}
+// 	return cmd
+// }
 
 // 1 -> 3,2,4
 // 2 -> 5
