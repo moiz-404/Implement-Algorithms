@@ -65,7 +65,7 @@ var graph = map[int][]int{
 	5: {6},
 }
 
-func runBFS() {
+func main() {
 	q := NewQeue()
 	rootNode := 1
 	visited := make([]int, 0)
